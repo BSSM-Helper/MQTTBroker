@@ -5,7 +5,7 @@ services:
     image: eclipse-mosquitto:2
     container_name: mosquitto-broker
     ports:
-      - "1883:1883"   # MQTT 기본 포트
+      - "1884:1883"   # MQTT 기본 포트
       - "9001:9001"   # 웹소켓 (옵션)
     volumes:
       - ./mosquitto/config:/mosquitto/config
