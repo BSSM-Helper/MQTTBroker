@@ -1,4 +1,4 @@
-import paho.mqtt.client as mqtt
+from core.MQTTClient import MQTTClient
 
 BROKER = "mosquitto"
 PORT = 1883
@@ -10,9 +10,4 @@ def on_connect(client, userdata, flags, rc, properties=None):
 def on_message(client, userdata, msg):
     print(f"{msg.topic} {msg.payload.decode()}", flush=True)
 
-client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION1)
-client.on_connect = on_connect
-client.on_message = on_message
-
-client.connect(BROKER, PORT)
-client.loop_forever()
+client = MQTTClient(on_connect, on_message, BROKER, PORT)

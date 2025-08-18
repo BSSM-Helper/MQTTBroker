@@ -6,5 +6,5 @@ WORKDIR /app
 RUN pip install --no-cache-dir paho-mqtt
 
 COPY main.py .
-
+COPY core ./core
 CMD ["python", "main.py"]
