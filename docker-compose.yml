@@ -3,7 +3,7 @@ version: "3.9"
 services:
   mosquitto:
     image: eclipse-mosquitto:2
-    container_name: mosquitto-broker
+    container_name: broker
     ports:
       - "1884:1883"   # MQTT 기본 포트
       - "9001:9001"   # 웹소켓 (옵션)
@@ -12,17 +12,16 @@ services:
       - ./mosquitto/data:/mosquitto/data
       - ./mosquitto/log:/mosquitto/log
     networks:
-      - mqtt_net
-
+      - helper_net
   python-app:
     build:
       context: ./app
       dockerfile: Dockerfile
-    container_name: python-client
+    container_name: client
     depends_on:
       - mosquitto
     networks:
-      - mqtt_net
+      - helper_net
 
 networks:
   mqtt_net:
